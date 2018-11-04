@@ -41,9 +41,10 @@ def get_user_location():
    #will update the contents of the entire display window
    pygame.display.flip()
    
+   while True:
    # get outputs of Mouseclick event handler 
-   buttonX, buttonY = MouseClick()
-   print((buttonX , buttonY))
+    buttonX, buttonY = MouseClick()
+    print((buttonX , buttonY))
 
 def main():
     pygame.init()
