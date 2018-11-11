@@ -1,7 +1,15 @@
 import pygame
+import web_scrapper
 #from pygame.locals import *
 
 pygame.init()
+
+#should return a string url
+def convert_coordiantes_walking_html(from_coordinates, destination):
+    # url for reference 
+    #http://maps.ntu.edu.sg/m?q=1.3535285933806145%2C+103.68827099377593&sch_btn=Go&font=+m&t=+Pioneer+Food+Court
+    return 'http://maps.ntu.edu.sg/m?q=' + str(from_coordinates[0]) + '%2C+' + str(from_coordinates[1]) + '&sch_btn=Go&font=+m&t=+' + '+'.join(destination.split(' '))
+
 
 # take this to be top left point
 hall_12_bus_stop_coordinates = (1.351937, 103.680543)
@@ -38,6 +46,10 @@ def event_handler():
             #print(ratio)
             new_cooridnates = (hall_12_bus_stop_coordinates[0]+difference_in_coordinates[0]*ratio[1], hall_12_bus_stop_coordinates[1]+difference_in_coordinates[1]*ratio[0])
             print(new_cooridnates)
+            destination = "Pioneer Food Court"
+            walking_url = convert_coordiantes_walking_html(new_cooridnates, destination)
+            print(walking_url)
+
 
 game_running = True
 
