@@ -43,7 +43,7 @@ class walking_directions:
 class bus_directions:
     def __init__(self, bus_url):
         self.url = bus_url
-        client = urlopen(walking_url)
+        client = urlopen(bus_url)
         page_html = client.read()
         client.close()
         page_soup = soup(page_html, "html.parser")
@@ -56,22 +56,22 @@ class bus_directions:
         return self.container.find_all("div", {"class":"locf dir"})[1].text
 
     def get_total_time(self):
-        return [i.text for i in container.find_all('div', {'class':'c1'})]
+        return [i.text for i in self.container.find_all('div', {'class':'c1'})]
     
     def get_total_fare(self):
-        return [i.text for i in container.find_all('div', {'class':'c2'})]
+        return [i.text for i in self.container.find_all('div', {'class':'c2'})]
     
     def get_transportation_via(self):
-        return [i.text for i in container.find_all('div', {'class':'c3'})]
+        return [i.text for i in self.container.find_all('div', {'class':'c3'})]
 
     def get_directions_title(self):
-        return [i.text for i in container.find_all('h5')]
+        return [i.text for i in self.container.find_all('h5')]
     
     def get_directions_distance(self):
-        return [i.text for i in container.find_all('div', {'class':'l'})]
+        return [i.text for i in self.container.find_all('div', {'class':'l'})]
     
     def get_directions_directions(self):
-        return [i.text for i in container.find_all('div', {'class':'r'})]
+        return [i.text for i in self.container.find_all('div', {'class':'r'})]
 """
 bus_url_p_0 = 'http://maps.ntu.edu.sg/m?q=University%20Health%20Service%20Building%20to%20Ananda%20Kitchen&d=b&p=0&fs=m'
 bus_url_default = 'http://maps.ntu.edu.sg/m?q=University%20Health%20Service%20Building%20to%20Ananda%20Kitchen&d=b&fs=m'
