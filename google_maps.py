@@ -47,10 +47,14 @@ reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
 
 # Request directions via public transit
 now = datetime.now()
-directions_result = gmaps.directions("Food Court 2, NTU",
-                                     "The Hive, NTU",
+
+def get_end_location_lat_lng(end_location):
+    directions_result = gmaps.directions("The hive, NTU",
+                                     end_location +", NTU",
                                      mode="transit",
                                      departure_time=now)
 
-end_location_lat = directions_result[0]['legs'][0]['end_location']['lat']
-end_location_lng = directions_result[0]['legs'][0]['end_location']['lng']
+    end_location_lat = directions_result[0]['legs'][0]['end_location']['lat']
+    end_location_lng = directions_result[0]['legs'][0]['end_location']['lng']
+    return (end_location_lat, end_location_lng)
+    

@@ -1,5 +1,6 @@
 import pygame
 import web_scrapper
+#import google_maps
 #from pygame.locals import *
 
 pygame.init()
