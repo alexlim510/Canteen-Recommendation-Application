@@ -33,7 +33,7 @@
           "roti john": 3.50
         },
         "indian": {
-          "roti prata": 3.00
+          "roti prata": 3.00,
           "nasi biryani": 4.00
         }
       },
@@ -44,18 +44,18 @@
       "booths": {
         "noodles": {
           "bean paste noodle": 3.00,
-          "mala beef noodle": 3.50
+          "mala beef noodle": 3.50,
           "mee sua" : 3.00
         },
         "indian": {
           "chapati set": 3.00,
-          "poori set": 2.50
+          "poori set": 2.50,
           "murtabak": 3.00
         },
         "xin yao chicken rice": {
           "chicken rice": 3.00,
           "char siew rice": 3.00,
-          "roast pork rice': 3.00
+          "roast pork rice": 3.00
         }
       },
       "rank": 1
