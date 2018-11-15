@@ -28,7 +28,7 @@ class walking_directions:
         return [self.container.find_all('div', {'class':'c2'})[0].text, self.container.find_all('div', {'class':'c2'})[1].text]
     
     def get_total_distance(self):
-        return self.container.find_all('div', {'class':'c1'})[1].text
+        return self.container.find_all('div', {'class':'c2'})[1].text
     
     def get_directions_title(self):
         return [i.text for i in self.container.find_all('h5', {'class':'m_drive'})]
