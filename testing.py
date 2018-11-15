@@ -57,31 +57,33 @@ def event_handler():
             #print(ratio)
             new_cooridnates = (hall_12_bus_stop_coordinates[0]+difference_in_coordinates[0]*ratio[1], hall_12_bus_stop_coordinates[1]+difference_in_coordinates[1]*ratio[0])
             print(new_cooridnates)
-            destination = "Pioneer Food Court"
-            walking_url = convert_coordiantes_walking_html(new_cooridnates, destination)
-            bus_url = convert_coordinates_bus_html(new_cooridnates, destination)[0]
-            print()
-            print()
-            print(bus_url)
-            bus_dir = web_scrapper.bus_directions(bus_url)
-            print()
-            print()
-            print()
-            print('From:', bus_dir.get_from_location())
-            print('To:', bus_dir.get_to_location())
-            time_lst = bus_dir.get_total_time()
-            fare_lst = bus_dir.get_total_fare()
-            via_lst = bus_dir.get_transportation_via()
-            print(time_lst[0], time_lst[1])
-            print(fare_lst[0], fare_lst[1])
-            print(via_lst[0], via_lst[1])
-            title = bus_dir.get_directions_title()
-            distance = bus_dir.get_directions_distance()
-            directions_lst = bus_dir.get_directions_directions()
-            for i in range(len(directions_lst)):
-                print(title[i])
-                print(distance[i])
-                print(directions_lst[i])
+            return new_coordinates
+        
+#            destination = "Pioneer Food Court"
+#            walking_url = convert_coordiantes_walking_html(new_cooridnates, destination)
+#            bus_url = convert_coordinates_bus_html(new_cooridnates, destination)[0]
+#            print()
+#            print()
+#            print(bus_url)
+#            bus_dir = web_scrapper.bus_directions(bus_url)
+#            print()
+#            print()
+#            print()
+#            print('From:', bus_dir.get_from_location())
+#            print('To:', bus_dir.get_to_location())
+#            time_lst = bus_dir.get_total_time()
+#            fare_lst = bus_dir.get_total_fare()
+#            via_lst = bus_dir.get_transportation_via()
+#            print(time_lst[0], time_lst[1])
+#            print(fare_lst[0], fare_lst[1])
+#            print(via_lst[0], via_lst[1])
+#            title = bus_dir.get_directions_title()
+#            distance = bus_dir.get_directions_distance()
+#            directions_lst = bus_dir.get_directions_directions()
+#            for i in range(len(directions_lst)):
+#                print(title[i])
+#                print(distance[i])
+#                print(directions_lst[i])
 
 
 game_running = True
