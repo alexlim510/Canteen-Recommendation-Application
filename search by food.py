@@ -1,7 +1,5 @@
-#import json
-
-#with open('canteen.json','r') as f:
-    #canteendata = json.load(f)
+import json
+from tkinter import *
 ############################################################################
 #LINEAR SEARCH
 def get_canteen_booth(canteendata,user_food):
@@ -20,19 +18,28 @@ def print_canteen_booth(canteen_booth_list):
     canteen_list = []
     booth_list = []
 
-    print("list of booths: ", end='')
+    boothlist = "list of booths: "
     for item in canteen_booth_list:
-        print(item[1], end=', ')
+        boothlist = boothlist + ',' + item[1]
 
-    print("list of canteens: ", end='')
+    canteenlist = "list of canteens: "
     for item in canteen_booth_list:
-        print(item[0], end=', ')
+        canteenlist = canteenlist + ',' + item[0]
 
+    
 
-def search_by_food(canteendata, user_food):
+def printbooth(canteen_booth_list, root):
+    for item in canteen_booth_list:
+        Label(root, text = item[0] + ': ' + item[1]).pack()
+
+        
+
+def search_by_food(canteendata, user_food, root):
     canteen_booth_list = get_canteen_booth(canteendata, user_food)
     if canteen_booth_list == []:
-        print("No canteen provide this food.")
+        Label(root, text = "No canteen provide this food.").pack()
     else:
-        print_canteen_booth(canteen_booth_list)
+        printbooth(canteen_booth_list,root)
+
+
 
