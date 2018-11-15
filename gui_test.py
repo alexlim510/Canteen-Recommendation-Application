@@ -64,19 +64,20 @@ class sortedListViewer:
         #variables, LINK FUNCTIONS TO THIS
         #CURRENTLY USED FOR TESTING, CHANGE LATER
         self.namelist = ('Canteen 1', 'Canteen 2', 'Canteen 4', 'Canteen 9')
-        self.pricelist = (3.95, 4.33, 2.34, 5.66)
-        self.foodlist = ('biryani', 'fish soup', 'chicken rice', 'ramen')
+        self.pricelist = ((3.95, 4.33, 2.34, 5.66), (3.22, 4.21, 5.22, 9.34), (3.92, 4.32, 2.33, 5.65), (3.21, 4.20, 5.21, 9.33))
+        self.ranklist = (1,2,3,4)
+        self.foodlist = (('A', 'B', 'C', 'D'), ('E', 'F', 'G', 'H'), ('I', 'J', 'K', 'L'), ('M', 'N', 'O', 'P'))
+        self.distlist = (800, 400, 250, 600)
         
         self.lnames = StringVar(value=self.namelist)
         
-        self.nameof = StringVar(value="Canteen 2") #test value
-        self.rankof = StringVar(value="Rank #5") #test
-        self.distof = StringVar(value="800m") #test
+        self.nameof = StringVar()
+        self.rankof = StringVar()
+        self.distof = StringVar()
         
         #widget
-        #do we really need labels?
+        #do we need labels?
         self.lbox = Listbox(self.frame, listvariable=self.lnames, height = 5)
-#        self.nameLabel = ttk.Label(self.frame, text = "Name: ")
         self.nameDisplay = ttk.Label(self.frame, textvariable=self.nameof)
         self.rankDisplay = ttk.Label(self.frame, textvariable=self.rankof)
         self.distDisplay = ttk.Label(self.frame, textvariable=self.distof)
@@ -87,7 +88,7 @@ class sortedListViewer:
         self.foodPriceDisplay.heading('Price', text ='Price')
         
         #grids
-        self.lbox.grid(column = 0, row = 0, rowspan = 4, sticky = (N,S,E,W))
+        self.lbox.grid(column = 0, row = 0, rowspan = 4, padx = 10, pady = 5, sticky = (N,S,E,W))
         self.nameDisplay.grid(column = 1, row = 0, padx = 10, pady = 5)
         self.rankDisplay.grid(column = 1, row = 1, padx = 10, pady = 5)
         self.distDisplay.grid(column = 1, row = 2, padx = 10, pady = 5)
@@ -100,18 +101,28 @@ class sortedListViewer:
         for i in range(0, len(self.namelist), 2):
             self.lbox.itemconfigure(i, background = "#f0f0ff")
         
-        #test, need to add to showDetails
-        for i in range(0, len(self.foodlist)):
-            self.foodPriceDisplay.insert('', 'end', values=(self.foodlist[i], self.pricelist[i]))
+        #if sortby == "dist":
+        
+        #elif sortby == ""
+       
+        
         
     def showDetails(self, *args):
-        list_index_tup = self.lbox.curselection()
-        if len(list_index_tup) == 1:
-            indx = int(list_index_tup[0])
-            self.lbox.see(indx)
-            name = self.namelist[indx]
-            self.nameof.set(name)
-        
+        #assume all datasets are sorted accordingly
+        #common sets share the same index
+        #tuples of tuples - food and prices
+        lbox_index_tup = self.lbox.curselection()
+        if len(lbox_index_tup) == 1:
+            indx = int(lbox_index_tup[0])
+            self.lbox.see(indx) #change focus
+            self.nameof.set("Name: %s" % self.namelist[indx])
+            self.rankof.set("Rank: #%i" % self.ranklist[indx])
+            self.distof.set("Distance from: %fm" % self.distlist[indx])
+            #clear treeview
+            self.foodPriceDisplay.delete(*self.foodPriceDisplay.get_children())
+            for i in range(0, len(self.foodlist[indx])):
+                self.foodPriceDisplay.insert('', 'end', values = (self.foodlist[indx][i], self.pricelist[indx][i]))
+    
 
 def main():
     root = Tk()
