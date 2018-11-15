@@ -1,10 +1,6 @@
 import pygame
-import web_scrapper
-#import google_maps
-#from pygame.locals import *
 
 pygame.init()
-
 
 # take this to be top left point
 hall_12_bus_stop_coordinates = (1.351937, 103.680543)
@@ -33,6 +29,7 @@ def event_handler():
         if event.type == pygame.QUIT:
             pygame.quit()
             quit() # stop python program execution 
+            
         elif event.type == pygame.MOUSEBUTTONDOWN:
             click = pygame.mouse.get_pos()
             #print(click)
@@ -40,9 +37,21 @@ def event_handler():
             ratio = ((click[0]-hall_12_pixel_coordinates[0])/difference_in_pixels[0], (click[1]-hall_12_pixel_coordinates[1])/difference_in_pixels[1])
             #print(ratio)
             new_coordinates = (hall_12_bus_stop_coordinates[0]+difference_in_coordinates[0]*ratio[1], hall_12_bus_stop_coordinates[1]+difference_in_coordinates[1]*ratio[0])
-            print(new_coordinates)
+            # print(new_coordinates)
             return new_coordinates
-        
+
+game_running = True
+
+while game_running:
+    output = event_handler()
+    print(output)
+    if output != None:
+        game_running = False
+
+    
+    screen.blit(scaled_map, (0, 0))
+    pygame.display.flip()
+
 #            destination = "Pioneer Food Court"
 #            walking_url = convert_coordiantes_walking_html(new_cooridnates, destination)
 #            bus_url = convert_coordinates_bus_html(new_cooridnates, destination)[0]
@@ -68,11 +77,3 @@ def event_handler():
 #                print(title[i])
 #                print(distance[i])
 #                print(directions_lst[i])
-
-
-game_running = True
-
-while game_running:
-    event_handler()
-    screen.blit(scaled_map, (0, 0))
-    pygame.display.flip()

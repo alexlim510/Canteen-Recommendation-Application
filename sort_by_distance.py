@@ -43,35 +43,15 @@ class distance_sorted:
             bus_distance_obj_0 = web_scrapper.bus_directions(bus_html[0])
             bus_distance_obj_1 = web_scrapper.bus_directions(bus_html[1])
             bus_distance_obj_2 = web_scrapper.bus_directions(bus_html[2])
-            self.dic_distance_canteens[canteen] = [{'walking_distance_obj': walking_distance_obj}, {'bus_distance_obj_0to2': [bus_distance_obj_0, bus_distance_obj_1, bus_distance_obj_2]}]
+            self.dic_distance_canteens[canteen] = [{'walking_distance_obj': walking_distance_obj}, {'bus_distance_obj_0to2)': [bus_distance_obj_0, bus_distance_obj_1, bus_distance_obj_2]}]
     
     def get_distance_dictionary(self):
-        # distance_dic[key][0]['walking_distance_obj'].get_total_distance())
-        # key = canteen name
-        # 0 is walking object & 1 is bus object
-        # 'walking_distance_obj' returns a walking_distance_obj
-        # 'bus_distance_obj_0to2' returns a list of bus objects, 0 being the best option
         return self.dic_distance_canteens
-    
-    def get_sorted_walking_distance(self):
-        """
-        Example result:
-            [('food court 3', '116 m'),
-             ('Food Court 2', '121 m'),
-             ('Food Court 1', '271 m')]
-            """
-        dic = {}
-        for key in self.distance_dic:
-            dic[key] = self.distance_dic[key][0]['walking_distance_obj'].get_total_distance()
-        sorted_d = sorted(dic.items(), key=operator.itemgetter(1))
-        return sorted_d
 
         
 
-#distance = distance_sorted((1.3479599, 103.6854919))
-#distance_dic = distance.get_distance_dictionary()
-        
-
-    
-#for key in distance_dic:
-#    print(key, distance_dic[key][0]['walking_distance_obj'].get_total_distance())   #change .get_total_distance to other functions as needed
+distance = distance_sorted((1.3479599, 103.6854919))
+distance_dic = distance.get_distance_dictionary()
+walk = distance_dic['Food Court 1'][0]['walking_distance_obj']
+walk.get_total_distance()
+walk.get_total_time()
