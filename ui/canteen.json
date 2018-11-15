@@ -1,0 +1,64 @@
+{
+  "canteen": {
+    "Food Court 1": {
+      "address": "Hall of Residence 1, 21 Nanyang Cir, Singapore 639778",
+      "gps coordinates": [1.346606, 103.686014],
+      "booths": {
+        "malay": {
+          "nasi lemak": 3.00,
+          "ayam penyet": 4.00
+        },
+        "noodles": {
+          "fish ball noodles": 3.00,
+          "minced meat noodles": 4.00
+        },
+        "western": {},
+        "chinese": {
+          "wanton noodles": 3.00,
+          "duck rice": 4.00,
+          "chicken rice": 3.50
+        }
+      },
+      "rank": 2
+    },
+    "food court 2": {
+      "address": "35 Students Walk, Nanyang Technological University, Singapore 639548",
+      "booths": {
+        "chinese": {
+          "fried rice": 2.00,
+          "steamed chicken rice": 2.50
+        },
+        "malay": {
+          "nasi lemak": 3.00,
+          "roti john": 3.50
+        },
+        "indian": {
+          "roti prata": 3.00,
+          "nasi biryani": 4.00
+        }
+      },
+      "rank": 3
+    },
+    "koufu @ the south spine": {
+      "address": "South Spine, Level B4,, Nanyang Link",
+      "booths": {
+        "noodles": {
+          "bean paste noodle": 3.00,
+          "mala beef noodle": 3.50,
+          "mee sua" : 3.00
+        },
+        "indian": {
+          "chapati set": 3.00,
+          "poori set": 2.50,
+          "murtabak": 3.00
+        },
+        "xin yao chicken rice": {
+          "chicken rice": 3.00,
+          "char siew rice": 3.00,
+          "roast pork rice": 3.00
+        }
+      },
+      "rank": 1
+    }
+  }
+}
