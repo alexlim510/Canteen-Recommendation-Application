@@ -7,9 +7,19 @@ pygame.init()
 #should return a string url
 def convert_coordiantes_walking_html(from_coordinates, destination):
     # url for reference 
-    #http://maps.ntu.edu.sg/m?q=1.3535285933806145%2C+103.68827099377593&sch_btn=Go&font=+m&t=+Pioneer+Food+Court
+    # http://maps.ntu.edu.sg/m?q=1.3535285933806145%2C+103.68827099377593&sch_btn=Go&font=+m&t=+Pioneer+Food+Court
     return 'http://maps.ntu.edu.sg/m?q=' + str(from_coordinates[0]) + '%2C+' + str(from_coordinates[1]) + '&sch_btn=Go&font=+m&t=+' + '+'.join(destination.split(' '))
 
+def convert_coordinates_bus_html(from_coordinates, destination):
+    # usually for bus there are three options
+    # lst of the three bus options
+    bus_lst = []
+    # http://maps.ntu.edu.sg/m?q=Tanjong%20Hall%20of%20Residence%20-%20Block%2020B%20to%20Pioneer%20Food%20Court&d=b&p=0&fs=m
+    bus_0 = 'http://maps.ntu.edu.sg/m?q=' + str(from_coordinates[0]) + '%2C+' + str(from_coordinates[1]) + '%20to%20' + '+'.join(destination.split(' ')) + '&d=b&p=0&fs=m'
+    bus_1 = 'http://maps.ntu.edu.sg/m?q=' + str(from_coordinates[0]) + '%2C+' + str(from_coordinates[1]) + '%20to%20' + '+'.join(destination.split(' ')) + '&d=b&p=1&fs=m'
+    bus_2 = 'http://maps.ntu.edu.sg/m?q=' + str(from_coordinates[0]) + '%2C+' + str(from_coordinates[1]) + '%20to%20' + '+'.join(destination.split(' ')) + '&d=b&p=2&fs=m'
+    bus_lst.extend([bus_0, bus_1, bus_2]) 
+    return bus_lst
 
 # take this to be top left point
 hall_12_bus_stop_coordinates = (1.351937, 103.680543)
@@ -48,7 +58,29 @@ def event_handler():
             print(new_cooridnates)
             destination = "Pioneer Food Court"
             walking_url = convert_coordiantes_walking_html(new_cooridnates, destination)
-            print(walking_url)
+            bus_url = convert_coordinates_bus_html(new_cooridnates, destination)[0]
+            print()
+            print()
+            print(bus_url)
+            bus_dir = web_scrapper.bus_directions(bus_url)
+            print()
+            print()
+            print()
+            print('From:', bus_dir.get_from_location())
+            print('To:', bus_dir.get_to_location())
+            time_lst = bus_dir.get_total_time()
+            fare_lst = bus_dir.get_total_fare()
+            via_lst = bus_dir.get_transportation_via()
+            print(time_lst[0], time_lst[1])
+            print(fare_lst[0], fare_lst[1])
+            print(via_lst[0], via_lst[1])
+            title = bus_dir.get_directions_title()
+            distance = bus_dir.get_directions_distance()
+            directions_lst = bus_dir.get_directions_directions()
+            for i in range(len(directions_lst)):
+                print(title[i])
+                print(distance[i])
+                print(directions_lst[i])
 
 
 game_running = True

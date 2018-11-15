@@ -2,6 +2,7 @@
   "canteen": {
     "Food Court 1": {
       "address": "21 Nanyang Circle Singapore 639778",
+      "gps coordinates": [1.346606, 103.686014],
       "booths": {
         "chicken rice": {
           "chicken rice": "$3.00"
