@@ -5,6 +5,8 @@ from tkinter import simpledialog
 import pygame
 import json
 from helper import *
+from sort_by_distance import *
+from web_scrapper import *
 
 current_loc = None
 
@@ -102,12 +104,12 @@ class startScreen:
             with open("canteen.json", 'r') as f:
                 canteendata = json.load(f)
             self.data = sort_by_rank(canteendata)
-            self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]) 
-            self.zipped = list(zip(self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist))
+            self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist, self.gpslist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]), self.data[4] 
+            self.zipped = list(zip(self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist, self.gpslist))
             self.zipped.sort()
-            self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist = zip(*self.zipped)
+            self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist, self.gpslist = zip(*self.zipped)
             self.newWindow = Toplevel(self.master)
-            self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
+            self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist, self.gpslist)
     
     def openSortRank(self):
         if current_loc == None:
@@ -117,8 +119,9 @@ class startScreen:
                 canteendata = json.load(f)
             self.data = sort_by_rank(canteendata)
             self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]) 
+            self.gpslist = self.data[4]
             self.newWindow = Toplevel(self.master)
-            self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
+            self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist, self.gpslist)
         
     def openSortFood(self):
         if current_loc == None:
@@ -132,8 +135,9 @@ class startScreen:
                     canteendata = json.load(f)
                 self.data = search_by_food(canteendata,self.foodsearch)
                 self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]) 
+                self.gpslist = self.data[4]
                 self.newWindow = Toplevel(self.master)
-                self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
+                self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist, self.gpslist)
                     
     def openSortPrice(self):
         if current_loc == None:
@@ -147,11 +151,12 @@ class startScreen:
                     canteendata = json.load(f)
                 self.data = search_by_price(canteendata,self.maxprice)
                 self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4])
+                self.gpslist = self.data[4]
                 self.newWindow = Toplevel(self.master)
-                self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
+                self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist, self.gpslist)
 
 class sortedListViewer:
-    def __init__(self, master, namelist, pricelist, ranklist, foodlist, distlist):
+    def __init__(self, master, namelist, pricelist, ranklist, foodlist, distlist, gpslist):
         self.master = master
         self.frame = ttk.Frame(self.master) #padding
         self.frame.grid(column = 0, row = 0, sticky = (N,W,E,S))
@@ -163,6 +168,7 @@ class sortedListViewer:
         self.ranklist = ranklist
         self.foodlist = foodlist
         self.distlist = distlist
+        self.gpslist = gpslist
         
         #variables
         self.lnames = StringVar(value=self.namelist)        
@@ -178,8 +184,8 @@ class sortedListViewer:
         self.nameDisplay = ttk.Label(self.frame, textvariable=self.nameof)
         self.rankDisplay = ttk.Label(self.frame, textvariable=self.rankof)
         self.distDisplay = ttk.Label(self.frame, textvariable=self.distof)
-        self.naviWalk = ttk.Button(self.frame, textvariable = self.walking)
-        self.naviBus = ttk.Button(self.frame, textvariable = self.bussing)
+        self.naviWalk = ttk.Button(self.frame, textvariable = self.walking, command=self.openWalkingDirections)
+        self.naviBus = ttk.Button(self.frame, textvariable = self.bussing, command=self.openBusDirections)
         
         #Treeview for food varieties and prices
         self.foodPriceDisplay = ttk.Treeview(self.frame, columns = ('Food', 'Price'), show='headings')
@@ -218,6 +224,89 @@ class sortedListViewer:
             for i in range(0, len(self.foodlist[indx])):
                 self.foodPriceDisplay.insert('', 'end', values = (self.foodlist[indx][i], self.pricelist[indx][i]))
     
+    def openWalkingDirections(self):
+        lbox_index_tup = self.lbox.curselection()
+        if len(lbox_index_tup) == 0:
+            messagebox.showinfo("Error", "Please select a location")
+        else:
+            indx = int(lbox_index_tup[0])
+            self.lbox.see(indx)
+            self.dest_loc = self.gpslist[indx]
+            self.newWindow = Toplevel(self.master)
+            self.app = walkingDirectionViewer(self.newWindow, current_loc, self.dest_loc)
+    
+    def openBusDirections(self):
+        lbox_index_tup = self.lbox.curselection()
+        if len(lbox_index_tup) == 0:
+            messagebox.showinfo("Error", "Please select a location")
+        else:
+            indx = int(lbox_index_tup[0])
+            self.lbox.see(indx)
+            self.dest_loc = self.gpslist[indx]
+            self.newWindow = Toplevel(self.master)
+            self.app = busDirectionViewer(self.newWindow, current_loc, self.dest_loc)
+    
+class walkingDirectionViewer:
+    def __init__(self, master, current_loc, dest_loc):
+        self.master = master
+        self.frame = ttk.Frame(self.master) #padding
+        self.frame.grid(column = 0, row = 0, sticky = (N,W,E,S))
+        self.master.grid_columnconfigure(0, weight = 1)
+        self.master.grid_rowconfigure(0, weight = 1)
+        
+        self.current_loc = current_loc
+        self.dest_loc = dest_loc
+        self.webadd = convert_coordinates_walking_html2(current_loc, dest_loc)
+        a = walking_directions(self.webadd)
+        
+        self.directions = a.get_directions_directions()
+        self.traveltime = a.get_total_time()
+        self.totaldist = a.get_total_distance()
+        print(self.totaldist)
+        self.ldir = StringVar(value = self.directions)
+        self.ttime = StringVar(value = self.traveltime)
+        self.tdist = StringVar(value = self.totaldist)
+        
+        self.titlelabel = Label(self.frame, text="Walking Directions")
+        self.disttaken = Label(self.frame, textvariable=self.tdist)
+        self.timetaken = Label(self.frame, textvariable=self.ttime)
+        self.lbox = Listbox(self.frame, listvariable=self.ldir, height = 20, width = 50)
+        
+        self.titlelabel.grid(column = 0, row = 0, padx = 10, pady = 5)
+        self.disttaken.grid(column = 1, row = 0, padx = 10, pady = 5)
+        self.timetaken.grid(column = 1, row = 1, padx = 10, pady = 5)
+        self.lbox.grid(column = 0, row = 1, rowspan = 4, padx = 10, pady = 5, sticky = (N,S,E,W))
+
+class busDirectionViewer:
+    def __init__(self, master, current_loc, dest_loc):
+        self.master = master
+        self.frame = ttk.Frame(self.master) #padding
+        self.frame.grid(column = 0, row = 0, sticky = (N,W,E,S))
+        self.master.grid_columnconfigure(0, weight = 1)
+        self.master.grid_rowconfigure(0, weight = 1)
+        
+        self.current_loc = current_loc
+        self.dest_loc = dest_loc
+        self.webadd = convert_coordinates_bus_html2(current_loc, dest_loc)[0]
+        b = bus_directions(self.webadd)
+        
+        self.directions = b.get_directions_directions()
+        self.traveltime = b.get_total_time()
+        self.totaldist = b.get_directions_distance()
+        print(self.totaldist)
+        self.ldir = StringVar(value = self.directions)
+        self.ttime = StringVar(value = self.traveltime)
+        self.tdist = StringVar(value = self.totaldist)
+        
+        self.titlelabel = Label(self.frame, text="Bus & Walking Directions")
+        self.disttaken = Label(self.frame, textvariable=self.tdist)
+        self.timetaken = Label(self.frame, textvariable=self.ttime)
+        self.lbox = Listbox(self.frame, listvariable=self.ldir, height = 20, width = 100)
+        
+        self.titlelabel.grid(column = 0, row = 0, padx = 10, pady = 5)
+        self.disttaken.grid(column = 0, row = 2, padx = 10, pady = 5)
+        self.timetaken.grid(column = 0, row = 3, padx = 10, pady = 5)
+        self.lbox.grid(column = 0, row = 1, rowspan = 4, padx = 10, pady = 5, sticky = (N,S,E,W))
 
 def main():
     root = Tk()
