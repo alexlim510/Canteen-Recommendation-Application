@@ -16,7 +16,7 @@
           "minced meat noodles": 4.0
         },
         "western": {
-       		"fish and chips" : 6.0
+          "fish and chips": 6.0
         },
         "chinese": {
           "wanton noodles": 3.0,
@@ -173,7 +173,10 @@
     },
     "Food Court 9": {
       "address": "50 Nanyang Avenue, Singapore 639798 ",
-      "gps coordinates": [1.352163, 103.6857899],
+      "gps coordinates": [
+        1.352163,
+        103.6857899
+      ],
       "booths": {
         "italian": {
           "pizza": 5.0,
@@ -203,7 +206,10 @@
     },
     "Food Court 11": {
       "address": "20 Nanyang Avenue  Singapore 639809 ",
-      "gps coordinates": [1.3468957, 103.689878],
+      "gps coordinates": [
+        1.3548922,
+        103.6864067
+      ],
       "booths": {
         "italian": {
           "ramen": 5.0,
@@ -233,7 +239,10 @@
     },
     "Food Court 13": {
       "address": "32 Nanyang Cresent  Singapore 637658",
-      "gps coordinates": [1.3516101, 103.6812201],
+      "gps coordinates": [
+        1.3516101,
+        103.6812201
+      ],
       "booths": {
         "italian": {
           "ramen": 5.0,
@@ -263,7 +272,10 @@
     },
     "Ananda Kitchen": {
       "address": "60 Nanyang Crescent Blk 19A #01-02 Singapore 636957 ",
-      "gps coordinates": [1.3541964, 103.687121],
+      "gps coordinates": [
+        1.3541964,
+        103.687121
+      ],
       "booths": {
         "italian": {
           "pizza": 5.0,

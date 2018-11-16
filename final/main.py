@@ -182,7 +182,7 @@ class sortedListViewer:
         
         #widget
         #do we need labels?
-        self.lbox = Listbox(self.frame, listvariable=self.lnames, height = 5)
+        self.lbox = Listbox(self.frame, listvariable=self.lnames, height = 10)
         self.nameDisplay = ttk.Label(self.frame, textvariable=self.nameof)
         self.rankDisplay = ttk.Label(self.frame, textvariable=self.rankof)
         self.distDisplay = ttk.Label(self.frame, textvariable=self.distof)
@@ -278,6 +278,9 @@ class walkingDirectionViewer:
         self.disttaken.grid(column = 1, row = 0, padx = 10, pady = 5)
         self.timetaken.grid(column = 1, row = 1, padx = 10, pady = 5)
         self.lbox.grid(column = 0, row = 1, rowspan = 4, padx = 10, pady = 5, sticky = (N,S,E,W))
+        
+        for i in range(0, len(self.directions), 2):
+            self.lbox.itemconfigure(i, background = "#f0f0ff")
 
 class busDirectionViewer:
     def __init__(self, master, current_loc, dest_loc):
@@ -293,22 +296,31 @@ class busDirectionViewer:
         b = bus_directions(self.webadd)
         
         self.directions = b.get_directions_directions()
-        self.traveltime = b.get_total_time()
-        self.totaldist = b.get_directions_distance()
-        print(self.totaldist)
+        self.traveltime = b.get_total_time()[1]
+#        self.totaldist = b.get_directions_distance()
+        self.bussvc = b.get_transportation_via()[1]
+#        print(self.traveltime)
+#        print(self.totaldist)
+#        print(self.bussvc)
         self.ldir = StringVar(value = self.directions)
         self.ttime = StringVar(value = self.traveltime)
-        self.tdist = StringVar(value = self.totaldist)
+#        self.tdist = StringVar(value = self.totaldist)
+        self.bsvc = StringVar(value = self.bussvc)
         
         self.titlelabel = Label(self.frame, text="Bus & Walking Directions")
-        self.disttaken = Label(self.frame, textvariable=self.tdist)
+#        self.disttaken = Label(self.frame, textvariable=self.tdist)
         self.timetaken = Label(self.frame, textvariable=self.ttime)
-        self.lbox = Listbox(self.frame, listvariable=self.ldir, height = 20, width = 100)
+        self.bustaken = Label(self.frame, textvariable=self.bsvc)
+        self.lbox = Listbox(self.frame, listvariable=self.ldir, height = 10, width = 100)
         
         self.titlelabel.grid(column = 0, row = 0, padx = 10, pady = 5)
-        self.disttaken.grid(column = 0, row = 2, padx = 10, pady = 5)
-        self.timetaken.grid(column = 0, row = 3, padx = 10, pady = 5)
+#        self.disttaken.grid(column = 1, row = 4, padx = 10, pady = 5)
+        self.timetaken.grid(column = 1, row = 2, padx = 10, pady = 5)
+        self.bustaken.grid(column = 1, row = 3, padx = 10, pady = 5)
         self.lbox.grid(column = 0, row = 1, rowspan = 4, padx = 10, pady = 5, sticky = (N,S,E,W))
+        
+        for i in range(0, len(self.directions), 2):
+            self.lbox.itemconfigure(i, background = "#f0f0ff")
 
 def main():
     root = Tk()
