@@ -48,11 +48,16 @@ def sort_by_rank(canteendata):
     rank_list = []
     food_list = []
     price_list = []
+    gps_list = []
     added = False
     
     for canteens in canteendata['canteen']:
         canteenrank_list.append((canteens, canteendata['canteen'][canteens]['rank']))
+    print(canteenrank_list)
+    print('test')
     canteenrank_list = mergesort(canteenrank_list)
+    print('AAAAA')
+    print(canteenrank_list)
     
     for item in canteenrank_list:
         for booths in canteendata['canteen'][item[0]]['booths']:
@@ -69,6 +74,7 @@ def sort_by_rank(canteendata):
                     rank_list.append(item[1])
                     food_list.append([food])
                     price_list.append([price])
+                    gps_list.append(canteendata['canteen'][item[0]]['gps coordinates'])
                 added = False
-    return canteen_list, rank_list, food_list, price_list
+    return canteen_list, rank_list, food_list, price_list, gps_list
 

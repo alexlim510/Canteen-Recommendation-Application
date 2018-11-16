@@ -111,8 +111,12 @@ class startScreen:
         if current_loc == None:
             messagebox.showinfo("Error", "Please select your current location before continuing.")
         else:
+            with open("canteen.json", 'r') as f:
+                canteendata = json.load(f)
+            self.data = sort_by_rank(canteendata)
+            self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]) 
             self.newWindow = Toplevel(self.master)
-            self.app = sortedListViewer(self.newWindow)
+            self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
         
     def openSortFood(self):
         if current_loc == None:
