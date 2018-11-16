@@ -7,6 +7,7 @@ import json
 from helper import *
 from sort_by_distance import *
 from web_scrapper import *
+from updater import *
 
 current_loc = None
 
@@ -37,9 +38,10 @@ class startScreen:
         self.sort_price.pack()
         
     def openConfigure(self):
-        #open separate configuration window
-        #use pyforms?
-        pass
+        with open('canteen.json', 'r') as f:
+            canteendata = json.load(f)
+        update(canteendata)
+        
     
     def openLocSelector(self):
         #retrieve location from map and show current location

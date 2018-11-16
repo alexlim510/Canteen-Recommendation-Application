@@ -15,7 +15,9 @@
           "fish ball noodles": 3.0,
           "minced meat noodles": 4.0
         },
-        "western": {},
+        "western": {
+       		"fish and chips" : 6.0
+        },
         "chinese": {
           "wanton noodles": 3.0,
           "duck rice": 4.0,
@@ -197,7 +199,7 @@
           "roti john": 3.5
         }
       },
-      "rank": null
+      "rank": 7
     },
     "Food Court 11": {
       "address": "20 Nanyang Avenue  Singapore 639809 ",
@@ -227,7 +229,7 @@
           "chicken curry": 3.5
         }
       },
-      "rank": null
+      "rank": 8
     },
     "Food Court 13": {
       "address": "32 Nanyang Cresent  Singapore 637658",
@@ -257,7 +259,7 @@
           "roti john": 3.5
         }
       },
-      "rank": null
+      "rank": 9
     },
     "Ananda Kitchen": {
       "address": "60 Nanyang Crescent Blk 19A #01-02 Singapore 636957 ",
@@ -287,7 +289,7 @@
           "chicken curry": 3.5
         }
       },
-      "rank": null
+      "rank": 10
     }
   }
 }
