@@ -99,11 +99,13 @@ class startScreen:
         if current_loc == None:
             messagebox.showinfo("Error", "Please select your current location before continuing.")
         else:
-            self.namelist = ('Canteen 1', 'Canteen 2', 'Canteen 4', 'Canteen 9')
-            self.pricelist = ((3.95, 4.33, 2.34, 5.66), (3.22, 4.21, 5.22, 9.34), (3.92, 4.32, 2.33, 5.65), (3.21, 4.20, 5.21, 9.33))
-            self.ranklist = (1,2,3,4)
-            self.foodlist = (('A', 'B', 'C', 'D'), ('E', 'F', 'G', 'H'), ('I', 'J', 'K', 'L'), ('M', 'N', 'O', 'P'))
-            self.distlist = (800, 400, 250, 600)
+            with open("canteen.json", 'r') as f:
+                canteendata = json.load(f)
+            self.data = sort_by_rank(canteendata)
+            self.namelist, self.ranklist, self.foodlist, self.pricelist, self.distlist = self.data[0], self.data[1], self.data[2], self.data[3], calc_dist_multiple_gps(current_loc, self.data[4]) 
+            self.zipped = list(zip(self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist))
+            self.zipped.sort()
+            self.distlist, self.namelist, self.ranklist, self.foodlist, self.pricelist = zip(*self.zipped)
             self.newWindow = Toplevel(self.master)
             self.app = sortedListViewer(self.newWindow, self.namelist, self.pricelist, self.ranklist, self.foodlist, self.distlist)
     
