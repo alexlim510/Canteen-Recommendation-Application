@@ -1,0 +1,156 @@
+{
+  "canteen": {
+    "Food Court 1": {
+      "address": "Hall of Residence 1, 21 Nanyang Cir, Singapore 639778",
+      "gps coordinates": [ 1.346606, 103.686014 ],
+      "booths": {
+        "malay": {
+          "nasi lemak": 3.00,
+          "ayam penyet": 4.00
+        },
+        "noodles": {
+          "fish ball noodles": 3.00,
+          "minced meat noodles": 4.00
+        },
+        "western": {},
+        "chinese": {
+          "wanton noodles": 3.00,
+          "duck rice": 4.00,
+          "chicken rice": 3.50
+        }
+      },
+      "rank": 5
+    },
+    "food court 2": {
+      "address": "35 Students Walk, Nanyang Technological University, Singapore 639548",
+	  "gps coordinates": [ 1.3483645, 103.685482 ],
+      "booths": {
+        "chinese": {
+          "fried rice": 2.00,
+          "steamed chicken rice": 2.50
+        },
+        "malay": {
+          "nasi lemak": 3.00,
+          "roti john": 3.50
+        },
+        "indian": {
+          "roti prata": 3.00,
+          "nasi biryani": 4.00
+        }
+      },
+      "rank": 6
+    },
+    "koufu @ the south spine": {
+      "address": "South Spine, Level B4,, Nanyang Link",
+	  "gps coordinates": [ 1.3424592, 103.6824264 ],
+      "booths": {
+        "noodles": {
+          "bean paste noodle": 3.00,
+          "mala beef noodle": 3.50,
+          "mee sua": 3.00
+        },
+        "indian": {
+          "chapati set": 3.00,
+          "poori set": 2.50,
+          "murtabak": 3.00
+        },
+        "xin yao chicken rice": {
+          "chicken rice": 3.00,
+          "char siew rice": 3.00,
+          "roast pork rice": 3.00
+        }
+      },
+      "rank": 2
+    },
+    "north spine food court": {
+      "address": "76 Nanyang Drive, N2.1, #02-03, Nanyang Technological University, 637331",
+	  "gps coordinates": [ 1.3470291, 103.680254 ],
+      "booths": {
+        "western": {
+          "chicken chop": 5.00,
+          "spaghetti and meatballs": 5.00,
+          "steak": 6.00
+        },
+        "chicken rice": {
+          "steamed chicken rice": 3.00,
+          "roasted pork rice": 2.50,
+          "roasted duck rice": 3.00,
+          "char siew rice": 3.00
+        },
+        "malay": {
+          "mee soto": 2.50,
+          "mee rebus": 3.00,
+          "lontong": 2.50,
+          "mee siam": 2.50
+        },
+        "noodles": {
+          "curry chicken noodle": 2.80,
+          "roasted chicken noodle": 2.80,
+          "u mian": 2.80,
+          "mee sua": 2.80
+        }
+      },
+      "rank": 1
+    },
+    "food court 16": {
+      "address": "50 Nanyang Walk, Singapore 637658",
+	  "gps coordinates": [ 1.3502996, 103.6809143 ],
+      "booths": {
+        "western": {
+          "pork chop": 5.00,
+          "spaghetti and mashed potato": 5.00,
+          "cheese steak": 6.00
+        },
+        "malay": {
+          "veg mee goreng": 3.00,
+          "veg maggie goreng": 2.50,
+          "lontong": 3.00,
+          "nasi lemak": 3.00
+        },
+        "chinese": {
+          "white carrot cake": 2.50,
+          "black carrot cake": 3.00,
+          "fried rice": 2.50,
+          "hot plate tofu": 2.50
+        },
+        "korean": {
+          "bimbimbap": 4.00,
+          "army stew": 4.50,
+          "pork with rice": 4.00,
+          "bento set": 3.50
+        }
+      },
+      "rank": 3
+    },
+    "food court 14": {
+      "address": "34 Nanyang Cres, Singapore 637634",
+	  "gps coordinates": [ 1.3527248, 103.6821635 ],
+      "booths": {
+        "japanese": {
+          "ramen": 5.00,
+          "saba fish set": 5.00,
+          "bento set": 5.00
+        },
+        "malay": {
+          "nasi lemak": 3.00,
+          "soto ayam": 2.50,
+          "mee rebus": 3.20,
+          "mee soto": 3.00
+        },
+        "noodles": {
+          "mee hoon kway": 2.50,
+          "dry ramen": 3.00,
+          "fried fish bee hoon": 3.50,
+          "u mian": 3.00
+        },
+        "indian": {
+          "thosai": 4.00,
+          "roti prata": 3.00,
+          "roti prata with egg": 3.50,
+          "roti john": 3.50
+        }
+      },
+      "rank": 4
+    }
+  }
+}
