@@ -23,6 +23,7 @@
     },
     "food court 2": {
       "address": "35 Students Walk, Nanyang Technological University, Singapore 639548",
+	  "gps coordinates": [ 1.3483645, 103.685482 ],
       "booths": {
         "chinese": {
           "fried rice": 2.00,
@@ -41,6 +42,7 @@
     },
     "koufu @ the south spine": {
       "address": "South Spine, Level B4,, Nanyang Link",
+	  "gps coordinates": [ 1.3424592, 103.6824264 ],
       "booths": {
         "noodles": {
           "bean paste noodle": 3.00,
@@ -62,6 +64,7 @@
     },
     "north spine food court": {
       "address": "76 Nanyang Drive, N2.1, #02-03, Nanyang Technological University, 637331",
+	  "gps coordinates": [ 1.3470291, 103.680254 ],
       "booths": {
         "western": {
           "chicken chop": 5.00,
@@ -91,6 +94,7 @@
     },
     "food court 16": {
       "address": "50 Nanyang Walk, Singapore 637658",
+	  "gps coordinates": [ 1.3502996, 103.6809143 ],
       "booths": {
         "western": {
           "pork chop": 5.00,
@@ -120,6 +124,7 @@
     },
     "food court 14": {
       "address": "34 Nanyang Cres, Singapore 637634",
+	  "gps coordinates": [ 1.3527248, 103.6821635 ],
       "booths": {
         "japanese": {
           "ramen": 5.00,
