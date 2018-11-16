@@ -85,7 +85,7 @@ class startScreen:
 
         while game_running:
             output = event_handler()
-            print(output)
+            #print(output)
             screen.blit(scaled_map, (0, 0))
             pygame.display.flip()
             if output != None:
@@ -93,7 +93,7 @@ class startScreen:
                 current_loc = output
                 game_running = False
                 pygame.quit()
-                print(current_loc)
+                #print(current_loc)
     
     def openSortDist(self):
         if current_loc == None:
@@ -169,6 +169,8 @@ class sortedListViewer:
         self.nameof = StringVar()
         self.rankof = StringVar()
         self.distof = StringVar()
+        self.walking = StringVar(value="Walk")
+        self.bussing = StringVar(value="Bus+Walk")
         
         #widget
         #do we need labels?
@@ -176,6 +178,8 @@ class sortedListViewer:
         self.nameDisplay = ttk.Label(self.frame, textvariable=self.nameof)
         self.rankDisplay = ttk.Label(self.frame, textvariable=self.rankof)
         self.distDisplay = ttk.Label(self.frame, textvariable=self.distof)
+        self.naviWalk = ttk.Button(self.frame, textvariable = self.walking)
+        self.naviBus = ttk.Button(self.frame, textvariable = self.bussing)
         
         #Treeview for food varieties and prices
         self.foodPriceDisplay = ttk.Treeview(self.frame, columns = ('Food', 'Price'), show='headings')
@@ -187,7 +191,9 @@ class sortedListViewer:
         self.nameDisplay.grid(column = 1, row = 0, padx = 10, pady = 5)
         self.rankDisplay.grid(column = 1, row = 1, padx = 10, pady = 5)
         self.distDisplay.grid(column = 1, row = 2, padx = 10, pady = 5)
-        self.foodPriceDisplay.grid(column = 1, row = 3, padx = 10, pady = 5)
+        self.naviWalk.grid(column = 1, row = 3, padx = 10, pady = 5)
+        self.naviBus.grid(column = 1, row = 4, padx = 10, pady = 5)
+        self.foodPriceDisplay.grid(column = 1, row = 5, padx = 10, pady = 5)
         
         #event bindings
         self.lbox.bind('<<ListboxSelect>>', self.showDetails)
