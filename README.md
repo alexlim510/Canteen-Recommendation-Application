@@ -14,7 +14,7 @@
 
 ## Instructions
 1) Run main.py
-2) Click on '''Click here to retrieve your location'''
+2) Click on `Click here to retrieve your location`
 3) Click on a location on the map
-4) Click on '''distance'''
+4) Click on `distance`
 5) The closest canteens will be displayed
